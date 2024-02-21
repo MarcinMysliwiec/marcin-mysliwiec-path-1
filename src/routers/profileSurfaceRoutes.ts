@@ -1,7 +1,7 @@
 import express from 'express';
 import {
     calculateProfileSurface
-} from "../controllers/profileSurfaceController";
+} from "@controllers/profileSurfaceController";
 
 const router = express.Router();
 

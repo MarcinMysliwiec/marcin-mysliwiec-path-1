@@ -1,13 +1,14 @@
 // src/index.js
-import express, { Express } from "express";
-import dotenv from "dotenv";
-import profileSurfaceRoutes from './routes/profileSurfaceRoutes';
-dotenv.config();
+import * as dotenv from 'dotenv'
+import express from 'express'
+import validateEnv from '@utils/validateEnv'
 
-const app: Express = express();
-const port = process.env.PORT || 3000;
-app.use('/api/v1/calculate-profile-surface', profileSurfaceRoutes);
+//App Varaibles 
+dotenv.config()
 
-app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}`);
-});
+validateEnv();
+
+//intializing the express app 
+const app = express();
+
+module.exports = app
