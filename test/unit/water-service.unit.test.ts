@@ -61,10 +61,25 @@ describe('calculateWaterFields function', () => {
         expect(calculateWaterFields(profile)).toBe(1);
     });
 
-    it('should return 0 for a profile with all negative heights', () => {
+    it('should return 0 for a profile with only negative heights', () => {
         const profile: number[] = [-1, -2, -3, -4, -5];
         expect(calculateWaterFields(profile)).toBe(0);
     });
+    
+    it('should return the correct result for a profile with depressions in terrain', () => {
+        const profile: number[] = [-1, -2, -3, -4, -5, -1];
+        expect(calculateWaterFields(profile)).toBe(10);
+    });    
+
+    it('should return the correct result for a profile with depressions in terrain', () => {
+        const profile: number[] = [-1, -2, 0, -4, -5, -1];
+        expect(calculateWaterFields(profile)).toBe(8);
+    });
+    
+    it('should return the correct result for a profile with alternating positive and negative heights', () => {
+        const profile: number[] = [1, -4, -3, 2, 1, -2, 0];
+        expect(calculateWaterFields(profile)).toBe(11);
+    });    
 
     it('should return 4 for profile [3, 0, 2, 4]', () => {
         const profile: number[] = [3, 0, 2, 4];
