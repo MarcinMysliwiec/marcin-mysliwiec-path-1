@@ -12,7 +12,6 @@ app.use((req, res, next) => {
     res.setHeader('Content-Type', 'application/json');
     next();
 });
-  
 
 /*
   ===============================================================
@@ -34,3 +33,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, async () => {
    console.log(`listning on port ${PORT}`)
 })
+
+export default app;
