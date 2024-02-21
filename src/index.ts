@@ -1,14 +1,12 @@
 // src/index.js
 import * as dotenv from 'dotenv'
 import express from 'express'
-import validateEnv from '@utils/validateEnv'
+import validateEnv from '@utils/validate-env'
 
-//App Varaibles 
 dotenv.config()
 
 validateEnv();
 
-//intializing the express app 
 const app = express();
 
 module.exports = app
