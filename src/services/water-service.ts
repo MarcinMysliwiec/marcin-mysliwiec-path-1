@@ -16,7 +16,7 @@ export function calculateWaterFields(profile: number[]): number {
         }
 
         // Obliczanie pojemności wody dla aktualnego indeksu
-        let currentWaterFillArea = Math.max(0, Math.min(leftMax, rightMax) - profile[i]);
+        const currentWaterFillArea = Math.max(0, Math.min(leftMax, rightMax) - profile[i]);
         totalWaterFillAreas += currentWaterFillArea;
     }
 
