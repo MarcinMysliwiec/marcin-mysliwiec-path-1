@@ -1,4 +1,4 @@
-const { cleanEnv, str, port } = require('envalid');
+import { cleanEnv, port, str } from "envalid";
 
 /**
  * Validates and cleans environment variables.
