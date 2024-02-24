@@ -1,22 +1,27 @@
+/**
+ * Calculates the total water fill areas between blocks in a profile.
+ * @param {number[]} profile - Array representing the heights of blocks.
+ * @returns {number} - Total water fill areas.
+ */
 export function calculateWaterFields(profile: number[]): number {
-    let totalWaterFillAreas = 0;
+    let totalWaterFillAreas: number = 0;
 
-    for (let i = 1; i < profile.length - 1; i++) {
-        let leftMax = profile[0];
-        let rightMax = profile[profile.length - 1];
+    for (let i: number = 1; i < profile.length - 1; i++) {
+        let leftMax: number = profile[0];
+        let rightMax: number = profile[profile.length - 1];
 
-        // Szukanie najwyższej wysokości z lewej strony
-        for (let j = 0; j < i; j++) {
+        // Finding the maximum height from the left side
+        for (let j: number = 0; j < i; j++) {
             leftMax = Math.max(leftMax, profile[j]);
         }
 
-        // Szukanie najwyższej wysokości z prawej strony
-        for (let k = i + 1; k < profile.length; k++) {
+        // Finding the maximum height from the right side
+        for (let k: number = i + 1; k < profile.length; k++) {
             rightMax = Math.max(rightMax, profile[k]);
         }
 
-        // Obliczanie pojemności wody dla aktualnego indeksu
-        const currentWaterFillArea = Math.max(0, Math.min(leftMax, rightMax) - profile[i]);
+        // Calculating water capacity for the current index
+        const currentWaterFillArea: number = Math.max(0, Math.min(leftMax, rightMax) - profile[i]);
         totalWaterFillAreas += currentWaterFillArea;
     }
 
