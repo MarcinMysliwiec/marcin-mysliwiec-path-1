@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: node # Use the official Node.js image
+      - image: node
     working_directory: /usr/app
     steps:
       - checkout
@@ -21,33 +21,24 @@ jobs:
           paths:
             - .
 
-  deploy_to_prod:
+  deploy:
     docker:
-      - image: node # Use the same Node.js image
+      - image: node
     working_directory: /usr/app
     steps:
       - attach_workspace:
           at: /usr/app
       - run:
-          name: Deploy application to production
+          name: Deploy application
           command: |
-            if [ "${CIRCLE_JOB}" == "build" ]; then
-              git config --global user.email "marcin.mysliw@gmail.com"
-              git config --global user.name "Marcin Mysliwiec"
-              git clone https://github.com/MarcinMysliwiec/marcin-mysliwiec-path-1-prod.git
-              cp -r ./* marcin-mysliwiec-path-1-prod/
-              cd marcin-mysliwiec-path-1-prod
-              git add .
-              git commit -m "CircleCI deployment"
-              git push origin master
-            fi
+            yarn install --production
+            yarn start
 
 workflows:
-  version: 2
   build_and_deploy:
     jobs:
       - build
-      - deploy_to_prod:
+      - deploy:
           requires:
             - build
           filters:
