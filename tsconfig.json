@@ -1,8 +1,12 @@
 {
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  },
   "compilerOptions": {
     "target": "es2020",
     "lib": ["es2020"],
     "typeRoots": ["node_modules/@types"],
+    "types": ["node", "jest", "supertest"],
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -12,28 +16,31 @@
     "pretty": true,
     "sourceMap": true,
     "declaration": true,
-    "outDir": "dist",
+    "outDir": "build",
     "allowJs": true,
     "noEmit": false,
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "importHelpers": true,
-    "baseUrl": "src",
+    "baseUrl": "./",
+    "rootDir": "src",
+    "strict": true,  
+    "skipLibCheck": true,
     "paths": {
-      "@/*": ["*"],
-      "@config/*": ["config/*"],
-      "@controllers/*": ["controllers/*"],
-      "@databases/*": ["databases/*"],
-      "@dtos/*": ["dtos/*"],
-      "@exceptions/*": ["exceptions/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@models/*": ["models/*"],
-      "@routers/*": ["routers/*"],
-      "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"]
+      "@/*": ["./src/*"],
+      "@config/*": ["./src/config/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@databases/*": ["./src/databases/*"],
+      "@dtos/*": ["./src/dtos/*"],
+      "@exceptions/*": ["./src/exceptions/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@models/*": ["./src/models/*"],
+      "@routers/*": ["./src/routers/*"],
+      "@services/*": ["./src/services/*"],
+      "@utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["src//*.ts", "src//*.json", ".env"],
-  "exclude": ["node_modules", "src/http", "src/logs", "src/tests"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "src/**/*.test.ts", "src/**/*.spec.ts"]
 }

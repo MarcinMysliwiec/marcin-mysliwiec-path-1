@@ -1,7 +1,21 @@
 import request from 'supertest';
-import app from '../../src/server';
+import { Application } from 'express';
+import { Server } from 'http';
+const app: Application = require('../../src/index');
 
 describe('POST /api/v1/calculate-profile-surface', () => {
+  let server: Server;
+
+  beforeEach(async () => {
+    server = await app.listen(5000);
+  });
+
+  afterEach(async () => {
+    if (server) {
+      await server.close();
+    }
+  });
+ 
   it('should calculate water fields for a valid profile', async () => {
     const profile = [3, 1, 2, 4, 1, 3, 1, 5, 2, 2, 1];
     const response = await request(app)
@@ -24,3 +38,4 @@ describe('POST /api/v1/calculate-profile-surface', () => {
     expect(response.body).toHaveProperty('error', 'Invalid profile array');
   });
 });
+
