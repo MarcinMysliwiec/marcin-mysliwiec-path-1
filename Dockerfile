@@ -22,8 +22,8 @@ ENV NODE_ENV=production
 # Expose port 3000
 EXPOSE 3000
 
-# Change directory to the server package and run the generated JavaScript files
-CMD ["node", "./packages/server/dist/index.js"]  # Adjusted path here
+# Start built code
+CMD ["yarn", "start"]
 
 # Set the user to run the app
 USER node
