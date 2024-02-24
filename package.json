@@ -11,8 +11,8 @@
     "test:unit": "cross-env NODE_ENV=test jest test/unit",
     "test:integration": "cross-env NODE_ENV=test jest test/integration --detectOpenHandles",
     "ci:test": "cross-env NODE_ENV=test jest --ci --runInBand --detectOpenHandles --forceExit",
-    "lint": "eslint . --ext .ts",
-    "lint:fix": "eslint . --ext .ts --fix"
+    "lint": "eslint --config eslint.json src",
+    "lint:fix": "eslint --config eslint.json --fix src"
   },
   "keywords": [],
   "author": "",
