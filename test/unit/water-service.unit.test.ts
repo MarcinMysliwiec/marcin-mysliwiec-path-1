@@ -32,7 +32,7 @@ describe('calculateWaterFields function', () => {
     });
 
     it('should return the correct number of water-filled fields for the given array', () => {
-        const profile = [3, 2, 4, 1, 2];
+        const profile: number[] = [3, 2, 4, 1, 2];
         expect(calculateWaterFields(profile)).toBe(2);
     });
 

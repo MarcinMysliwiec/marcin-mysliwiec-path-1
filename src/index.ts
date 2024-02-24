@@ -1,31 +1,4 @@
-
-
-import profileSurfaceRoutes from '@routers/profileSurfaceRoutes';
-import express, { Request, Response } from 'express';
-import {errorHandler} from "@middlewares/errors";
-import * as dotenv from 'dotenv'
-import validateEnv from '@utils/validate-env'
-
-
-dotenv.config()
-
-validateEnv();
-
-const app = express();
-
-// Middleware to parse JSON request bodies
-app.use(express.json());
-
-// Middleware to set Content-Type header to application/json
-app.use((req, res, next) => {
-    res.setHeader('Content-Type', 'application/json');
-    next();
-});
-
-// Error handling
-app.use(errorHandler);
-
-app.use('/api/v1/calculate-profile-surface', profileSurfaceRoutes);
+import {server} from "@/server";
 
 /*
   ===============================================================
@@ -35,10 +8,7 @@ running on the local macchine we are asking the app to use 3000 as the port numb
 */
 const PORT = process.env.PORT || 3000
 
-
 //Listing to the app and running it on PORT 5000
-app.listen(PORT, async () => {
-   console.log(`listning on port ${PORT}`)
+server.listen(PORT, async () => {
+  console.log(`listning on port ${PORT}`)
 })
-
-export const server = app;

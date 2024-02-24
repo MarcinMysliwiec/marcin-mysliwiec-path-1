@@ -1,0 +1,29 @@
+
+
+import profileSurfaceRoutes from '@routers/profileSurfaceRoutes';
+import express from 'express';
+import {errorHandler} from "@middlewares/errors";
+import * as dotenv from 'dotenv'
+import validateEnv from '@utils/validate-env'
+
+dotenv.config()
+
+validateEnv();
+
+const app = express();
+
+// Middleware to parse JSON request bodies
+app.use(express.json());
+
+// Middleware to set Content-Type header to application/json
+app.use((req, res, next) => {
+    res.setHeader('Content-Type', 'application/json');
+    next();
+});
+
+// Error handling
+app.use(errorHandler);
+
+app.use('/api/v1/calculate-profile-surface', profileSurfaceRoutes);
+
+export const server = app;
