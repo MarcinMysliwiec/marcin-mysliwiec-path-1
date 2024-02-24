@@ -16,7 +16,8 @@ jobs:
       - image: node:latest
     working_directory: /usr/app
     steps:
-      - checkout
+      - attach_workspace:
+          at: /usr/app
       - run:
           name: Linting
           command: yarn lint
@@ -26,7 +27,8 @@ jobs:
       - image: node:latest
     working_directory: /usr/app
     steps:
-      - checkout
+      - attach_workspace:
+          at: /usr/app
       - run:
           name: Unit Tests
           command: yarn test:unit
@@ -36,7 +38,8 @@ jobs:
       - image: node:latest
     working_directory: /usr/app
     steps:
-      - checkout
+      - attach_workspace:
+          at: /usr/app
       - run:
           name: Integration Tests
           command: yarn test:integration
@@ -46,7 +49,8 @@ jobs:
       - image: node:latest
     working_directory: /usr/app
     steps:
-      - checkout
+      - attach_workspace:
+          at: /usr/app
       - run:
           name: Clean up
           command: yarn clean
@@ -61,10 +65,34 @@ workflows:
             - install_dependencies
       - unit_tests:
           requires:
+            - install_dependencies
             - lint
       - integration_tests:
           requires:
+            - install_dependencies
             - unit_tests
       - clean_up:
           requires:
+            - install_dependencies
             - integration_tests
+
+# Deploy job to test environment 
+# jobs:
+#   deploy:
+#     machine:
+#       enabled: true
+#     steps:
+#       - add_ssh_keys:
+#           fingerprints:
+#             - "${SSH_KEY_FINGERPRINT}"
+#       - run:
+#           name: Push to GitHub
+#           command: |
+#             git config --global user.email "${GIT_EMAIL}"
+#             git config --global user.name "${GIT_NAME}"
+#             git clone "${REPO_URL}"
+#             cd "${PROJECT_NAME}"
+#             cp -r /usr/app/* .
+#             git add .
+#             git commit -m "Automated deployment"
+#             git push origin main
