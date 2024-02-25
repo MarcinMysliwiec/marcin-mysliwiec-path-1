@@ -1,19 +1,18 @@
-name: Build and Deploy
+name: Node.js CI
 
-on:
-  push:
-    branches:
-      - master
+on: [push]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '14'
 
@@ -27,31 +26,4 @@ jobs:
 
       - name: Run tests
         run: yarn test:unit && yarn test:integration
-        working-directory: /usr/app
-
-      - name: Persist workspace
-        uses: actions/cache@v2
-        with:
-          path: .
-          key: ${{ runner.os }}-build-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Deploy application
-        run: |
-          yarn install --production
-          yarn start
         working-directory: /usr/app
