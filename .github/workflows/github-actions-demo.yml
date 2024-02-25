@@ -18,12 +18,9 @@ jobs:
 
       - name: Install Dependencies
         run: yarn install
-        working-directory: /usr/app
 
       - name: Build TypeScript code
         run: yarn build
-        working-directory: /usr/app
 
       - name: Run tests
-        run: yarn test:unit && yarn test:integration
-        working-directory: /usr/app
+        run: yarn ci:test
