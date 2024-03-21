@@ -6,7 +6,6 @@ describe('Profile Surface Routes', () => {
   it('should calculate water fields correctly', async () => {
     const profile = [3, 1, 2, 4, 0, 1, 3, 2];
     const expectedResult = { waterFields: calculateWaterFields(profile) };
-
     const response = await request(server)
       .post('/api/v1/calculate-profile-surface')
       .send({ profile })
