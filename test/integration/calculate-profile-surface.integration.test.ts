@@ -16,7 +16,6 @@ describe('Profile Surface Routes', () => {
   it('should handle invalid profile array', async () => {
     const profile = 'invalid'; // Sending an invalid profile
     const expectedErrorMessage = 'Invalid profile array';
-
     const response = await request(server)
       .post('/api/v1/calculate-profile-surface')
       .send({ profile })
