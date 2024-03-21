@@ -11,7 +11,6 @@ describe('Profile Surface Routes', () => {
       .post('/api/v1/calculate-profile-surface')
       .send({ profile })
 
-
       .expect(200);
     expect(response.body).toEqual(expectedResult);
   });
@@ -20,14 +19,12 @@ describe('Profile Surface Routes', () => {
   it('should handle invalid profile array', async () => {
     const profile = 'invalid'; // Sending an invalid profile
 
-    
+
     const expectedErrorMessage = 'Invalid profile array';
     const response = await request(server)
       .post('/api/v1/calculate-profile-surface')
       .send({ profile })
       .expect(400);
-
-    
     expect(response.body.error).toBe(expectedErrorMessage);
   });
 });
