@@ -12,7 +12,7 @@ describe('Profile Surface Routes', () => {
       .send({ profile })
       .expect(200);
 
-      
+
     expect(response.body).toEqual(expectedResult);
   });
 
@@ -24,7 +24,6 @@ describe('Profile Surface Routes', () => {
       .post('/api/v1/calculate-profile-surface')
       .send({ profile })
       .expect(400);
-
     expect(response.body.error).toBe(expectedErrorMessage);
   });
 });
