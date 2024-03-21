@@ -3,6 +3,7 @@ import { server } from '../../src/server';
 import { calculateWaterFields } from '../../src/services/water-service';
 
 describe('Profile Surface Routes', () => {
+  
   it('should calculate water fields correctly', async () => {
     const profile = [3, 1, 2, 4, 0, 1, 3, 2];
     const expectedResult = { waterFields: calculateWaterFields(profile) };
