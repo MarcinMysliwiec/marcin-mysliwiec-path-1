@@ -10,7 +10,6 @@ describe('Profile Surface Routes', () => {
     const response = await request(server)
       .post('/api/v1/calculate-profile-surface')
       .send({ profile })
-
       .expect(200);
     expect(response.body).toEqual(expectedResult);
   });
